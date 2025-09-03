@@ -1,0 +1,15 @@
+import pandas as pd
+import os
+
+# مسار المجلد اللي فيه ملفات الإكسل
+folder = "excels"
+all_files = [f for f in os.listdir(folder) if f.endswith(".xlsx")]
+
+merged = pd.DataFrame()
+
+for file in all_files:
+    df = pd.read_excel(os.path.join(folder, file))
+    merged = pd.concat([merged, df])
+
+merged.to_excel("final_report.xlsx", index=False)
+print("✅ تم دمج كل الملفات في ملف واحد final_report.xlsx")
